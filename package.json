@@ -1,0 +1,19 @@
+{
+  "name": "game_sleuth",
+  "version": "1.0.0",
+  "description": "solo project app for suggesting games to users",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ethancoyne01@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.2",
+    "angular-route": "^1.6.2",
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "mongoose": "^4.8.2",
+    "skeleton": "^0.1.2"
+  }
+}
