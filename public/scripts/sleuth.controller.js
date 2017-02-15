@@ -2,25 +2,18 @@ app.controller('sleuthController', function(SleuthService) {
   console.log('sleuthController is loaded');
   var sleuth = this;
 
-  //username will be stored here, to be used across controllers
-  sleuth.userName = "";
 
-  //this grabs the username from the DOM, and stores it in SleuthService
-  sleuth.storeUsername = function(userName) {
-    SleuthService.storeUsername(userName).then(function() {
-      console.log('CONTOLLER sending ', userName, ' to the service');
+
+  //this grabs the username from the DOM, and stores sends it to SleuthService to be stored in the db
+  sleuth.storeUserInfo = function(user) {
+    SleuthService.storeUserInfo(user).then(function() {
+      console.log('CONTROLLER storing: ', user.userName);
+    }).catch(function(err) {
+      console.log('CONTROLLER error storing userInfo', err);
     });
   }
 
-  //asks the SleuthService for the current username.
-  sleuth.getUsername = function() {
-    SleuthService.getUsername().then(function(response) {
-      console.log('CONTROLLER current user is: ', response);
-      sleuth.userName = response;
-    });
-  } // end sleuth.getUsername
-  //calls getUsername on page load
-  sleuth.getUsername();
+
 
 
 }); // end sleuthController

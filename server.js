@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var mongoose = require('mongoose');
 
-// var user = require('./routes/user')
+var user = require('./routes/user')
 app.use(bodyParser.json());
 
 /** --- MONGOOSE CONNECTION --- **/
@@ -20,7 +20,7 @@ mongoose.connection.on('error', function () {
 
 /** -- ROUTES -- **/
 app.use(express.static('public'));
-// app.use('/user', user);
+app.use('/user', user);
 
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));

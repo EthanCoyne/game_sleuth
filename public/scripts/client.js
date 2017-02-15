@@ -5,9 +5,9 @@ app.config(function($routeProvider, $locationProvider) {
   $routeProvider.when('/login', {
     templateUrl: '/views/login.html',
      controller: 'sleuthController as sleuth'
-  }).when('/survey', {
+  }).when('/tagSurvey', {
     templateUrl: '/views/tagSurvey.html',
-     controller: 'sleuthController as sleuth'
+     controller: 'tagController as tagCtrl'
   }).when('/watchlist', {
     templateUrl: 'views/watchlist.html',
     controller: 'sleuthController as sleuth'
