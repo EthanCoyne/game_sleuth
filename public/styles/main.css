@@ -1,1 +1,10 @@
+#scrollArea {
+  height: 380px;
+  overflow: auto;
+  border: 1px solid black;
+}
 
+#bottom {
+  display: block;
+  margin-top: 2000px;
+}

@@ -1,7 +1,15 @@
 <h2>Tag Survey</h2>
-<div class="introBlurb">
+<div class="introBlurb five columns">
   <p>Welcome, {{tagCtrl.currentUserName}}!<br>
     Help us find the right games for you by selecting game mechanics you enjoy!<br>
     It won't take long, and you can edit this information at any time.
   </p>
+  <button ng-click="tagCtrl.getConceptsFromAPI()">get concept list</button>
+</div>
+<!-- Scroll box to hold concept tags -->
+<div id="scrollArea" class="seven columns offset-by-five">
+  <a ng-click="gotoBottom()">Go to bottom</a>
+  <button type="button" name="button">Example</button>
+  <button type="button" name="button">Example2</button>
+  <a id="bottom"></a> You're at the bottom!
 </div>

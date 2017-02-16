@@ -1,5 +1,40 @@
 app.service('SleuthService', function($http) {
   var currentUser = '';
+  var API = "https://www.giantbomb.com/api"
+  var APIkey = "3f1edf4d108b204cf9ed1583dd3c082ca2514468"
+  // var params = {
+  //   params: {
+  //     api_key: APIkey,
+  //     format: "json",
+  //     limit: "10"
+  //   }
+  // }
+
+  // //grabbing initial concept list from API
+  // this.getConceptsFromAPI = function () {
+  //   return $http({
+  //     method: "GET",
+  //     url: API + "/concepts/?api_key=" + APIkey + '&format=json&limit=10'
+  //   }).then(function(response) {
+  //     console.log('response from API: ', response);
+  //     return response;
+  //   }).catch(function(err) {
+  //     console.log('error getting response from API', err);
+  //   });
+  // }
+
+  // GET request to APIquery router
+  this.getConceptsFromAPI = function () {
+    return $http({
+      method: 'GET',
+      url: '/APIquery'
+    }).then(function(response) {
+      console.log('response from APIquery route: ', response);
+      return response;
+    }).catch(function(err) {
+        console.log('error getting response from API', err);
+      });
+  }
 
 //POST to store user info
   this.storeUserInfo = function(user) {

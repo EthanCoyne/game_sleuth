@@ -3,8 +3,10 @@ var app = express();
 var bodyParser = require('body-parser');
 var path = require('path');
 var mongoose = require('mongoose');
+var request = require('request');
 
-var user = require('./routes/user')
+var user = require('./routes/user');
+var APIquery = require('./routes/APIquery')
 app.use(bodyParser.json());
 
 /** --- MONGOOSE CONNECTION --- **/
@@ -21,6 +23,7 @@ mongoose.connection.on('error', function () {
 /** -- ROUTES -- **/
 app.use(express.static('public'));
 app.use('/user', user);
+app.use('/APIquery', APIquery)
 
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
