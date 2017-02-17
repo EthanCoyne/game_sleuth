@@ -4,15 +4,20 @@ app.controller('tagController', ['SleuthService', '$location', '$anchorScroll', 
 var tagCtrl = this;
 
 tagCtrl.currentUserName = "";
+//this holds the list of tags to be displayed in survey page
+tagCtrl.tagList = [];
 
 //asks service to query API for inital concept list
 tagCtrl.getConceptsFromAPI = function() {
   SleuthService.getConceptsFromAPI().then(function(response) {
     console.log('CONTROLLER API concepts received from service: ', response);
+    tagCtrl.tagList = response;
   }).catch(function(err) {
     console.log('CONTROLLER error requesting concepts from service');
   });
 }
+//grabs list of concept tags from API on page load.
+tagCtrl.getConceptsFromAPI();
 
 //scroll area
 tagCtrl.goToBottom = function() {

@@ -29,8 +29,8 @@ app.service('SleuthService', function($http) {
       method: 'GET',
       url: '/APIquery'
     }).then(function(response) {
-      console.log('response from APIquery route: ', response);
-      return response;
+      console.log('response from APIquery route: ', response.data.results);
+      return response.data.results;
     }).catch(function(err) {
         console.log('error getting response from API', err);
       });

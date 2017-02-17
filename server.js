@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var mongoose = require('mongoose');
 var request = require('request');
+var rp = require('request-promise');
 
 var user = require('./routes/user');
 var APIquery = require('./routes/APIquery')
