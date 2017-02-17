@@ -6,6 +6,8 @@ var tagCtrl = this;
 tagCtrl.currentUserName = "";
 //this holds the list of tags to be displayed in survey page
 tagCtrl.tagList = [];
+//currently selected tags will be saved here
+tagCtrl.currentlySelectedTags=[];
 
 //asks service to query API for inital concept list
 tagCtrl.getConceptsFromAPI = function() {
@@ -16,8 +18,26 @@ tagCtrl.getConceptsFromAPI = function() {
     console.log('CONTROLLER error requesting concepts from service');
   });
 }
+
+//gets taglist from service without querying the API
+tagCtrl.getConceptsFromService = function() {
+  SleuthService.getConceptsFromService().then(function(response) {
+    tagCtrl.tagList = response;
+  });
+}
+
+//asks service to query API for MORE concepts
+tagCtrl.getMoreConceptsFromAPI = function() {
+  SleuthService.getMoreConceptsFromAPI().then(function(response) {
+    console.log('CONTROLLER API concepts received from service: ', response);
+    tagCtrl.tagList = response;
+  }).catch(function(err) {
+    console.log('CONTROLLER error requesting concepts from service');
+  });
+}
+
 //grabs list of concept tags from API on page load.
-tagCtrl.getConceptsFromAPI();
+tagCtrl.getConceptsFromService();
 
 //scroll area
 tagCtrl.goToBottom = function() {
@@ -25,6 +45,11 @@ tagCtrl.goToBottom = function() {
 
   $anchorScroll();
 };
+
+tagCtrl.selectThisTag = function (tag) {
+  console.log('selected tag is: ', tag);
+  tagCtrl.currentlySelectedTags.push(tag);
+}
 
 //asks the SleuthService for the current username.
 tagCtrl.getUserInfo = function() {

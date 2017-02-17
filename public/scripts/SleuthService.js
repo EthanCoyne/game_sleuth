@@ -1,7 +1,10 @@
 app.service('SleuthService', function($http) {
   var currentUser = '';
-  var API = "https://www.giantbomb.com/api"
-  var APIkey = "3f1edf4d108b204cf9ed1583dd3c082ca2514468"
+  var API = "https://www.giantbomb.com/api";
+  var APIkey = "3f1edf4d108b204cf9ed1583dd3c082ca2514468";
+  //stores tagList to be referenced later without querying API
+  var tagList = [];
+
   // var params = {
   //   params: {
   //     api_key: APIkey,
@@ -30,9 +33,36 @@ app.service('SleuthService', function($http) {
       url: '/APIquery'
     }).then(function(response) {
       console.log('response from APIquery route: ', response.data.results);
+      response.data.results.forEach(function(tag) {
+        tagList.push(tag);
+      });
       return response.data.results;
     }).catch(function(err) {
         console.log('error getting response from API', err);
+      });
+  }
+
+  // GET request for more concepts to APIquery router
+  this.getMoreConceptsFromAPI = function () {
+    return $http({
+      method: 'GET',
+      url: '/APIquery'
+    }).then(function(response) {
+      console.log('response from APIquery route: ', response.data.results);
+      response.data.results.forEach(function(tag) {
+        tagList.push(tag);
+      });
+      return response.data.results;
+    }).catch(function(err) {
+        console.log('error getting response from API', err);
+      });
+  }
+
+  //returns existing tagList to the controller
+  this.getConceptsFromService = function() {
+    return new Promise(function(resolve,reject){
+      console.log(tagList);
+        resolve(tagList);
       });
   }
 

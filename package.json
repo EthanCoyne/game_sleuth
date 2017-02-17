@@ -15,6 +15,7 @@
     "body-parser": "^1.16.1",
     "express": "^4.14.1",
     "mongoose": "^4.8.2",
+    "normalize": "^0.3.1",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
     "skeleton": "^0.1.2"

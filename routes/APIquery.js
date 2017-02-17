@@ -9,7 +9,7 @@ var APIkey = "3f1edf4d108b204cf9ed1583dd3c082ca2514468"
 API + "/concepts/?api_key=" + APIkey + '&format=json&limit=10'
 //paramaters of API query request
 var options = {
-  url: 'http://www.giantbomb.com/api/concepts/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&limit=100',
+  url: 'http://www.giantbomb.com/api/concepts/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&limit=10',
   headers: {
     'User-Agent': 'CogentHyena123'},
     json: true
