@@ -21,9 +21,6 @@
     <td>{{game.developers[0].name}}</td>
     <td>{{game.publishers[0].name}}</td>
     <td><p ng-repeat="platform in game.platforms">{{platform.name}}</p><br></td>
+    <td><button ng-click="sugCtrl.saveToWatchlist(game)">Save to Watchlist</button></td>
   </tr>
 </table>
-
-
-
-<img src="{{sugCtrl.gameList[0].results.images[2].medium_url}}" alt="">

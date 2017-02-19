@@ -1,1 +1,25 @@
 <h1>My Watchlist</h1>
+
+<table style="width:100%">
+  <tr>
+    <th> </th>
+    <th>Title</th>
+    <th>Release Date</th>
+    <th>Description</th>
+    <th>Rating</th>
+    <th>Developer</th>
+    <th>Publisher</th>
+    <th>Platforms</th>
+  </tr>
+  <tr ng-repeat="game in watchCtrl.watchList">
+    <td><img src="{{game.image.icon_url}}" alt="{{game.name}}"></td>
+    <td>{{game.name}}</td>
+    <td>{{game.original_release_date}}</td>
+    <td>{{game.deck}}</td>
+    <td>{{game.original_game_rating[0].name}}</td>
+    <td>{{game.developers[0].name}}</td>
+    <td>{{game.publishers[0].name}}</td>
+    <td><p ng-repeat="platform in game.platforms">{{platform.name}}</p><br></td>
+    <td><button ng-click="watchCtrl.removeFromWatchlist(game)">Remove from watchlist</button></td>
+  </tr>
+</table>

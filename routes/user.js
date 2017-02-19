@@ -28,4 +28,20 @@ router.post('/', function(req, res) {
   });
 }); // end post to the db
 
+router.put('/:id', function(req, res) {
+  var id = "58a491cc94d8e644cca3c373";
+  var game = req.body;
+  // console.log('req.body to be stored is: ', req.body);
+  User.findByIdAndUpdate(id, {$push: {"watchlist": game}},
+  {safe: true, new: true},
+   function(err) {
+    if (err) {
+      console.log('error updating watchlist: ', err);
+      return res.sendStatus(500);
+    }
+    // console.log('ROUTER storing', req.body, ' to watchlist');
+    res.sendStatus(204);
+  });
+});
+
 module.exports=router;

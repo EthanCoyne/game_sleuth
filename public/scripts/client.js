@@ -10,7 +10,7 @@ app.config(function($routeProvider, $locationProvider) {
      controller: 'tagController as tagCtrl'
   }).when('/watchlist', {
     templateUrl: 'views/watchlist.html',
-    controller: 'sleuthController as sleuth'
+    controller: 'watchlistController as watchCtrl'
   }).when('/suggestions', {
     templateUrl: 'views/suggestions.html',
     controller: 'suggestionsController as sugCtrl'

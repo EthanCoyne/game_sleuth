@@ -2,8 +2,12 @@ app.service('SleuthService', function($http) {
   var currentUser = '';
   var API = "https://www.giantbomb.com/api";
   var APIkey = "3f1edf4d108b204cf9ed1583dd3c082ca2514468";
+
   //stores tagList to be referenced later without querying API
   var tagList = [];
+
+  //stores list of games in watchlist
+  var watchlist = [];
 
   // var params = {
   //   params: {
@@ -40,7 +44,7 @@ app.service('SleuthService', function($http) {
     }).catch(function(err) {
         console.log('error getting response from API', err);
       });
-  }
+  }// end getConceptsFromAPI
 
   // GET request for more concepts to APIquery router
   this.getMoreConceptsFromAPI = function () {
@@ -56,7 +60,7 @@ app.service('SleuthService', function($http) {
     }).catch(function(err) {
         console.log('error getting response from API', err);
       });
-  }
+  } // end getMoreConceptsFromAPI
 
   //returns existing tagList to the controller
   this.getConceptsFromService = function() {
@@ -64,7 +68,7 @@ app.service('SleuthService', function($http) {
       console.log(tagList);
         resolve(tagList);
       });
-  }
+  } // end getConceptsFromService
 
 //POST to store user info
   this.storeUserInfo = function(user) {
@@ -79,7 +83,7 @@ app.service('SleuthService', function($http) {
     }).catch(function(err) {
       console.log('ONSERVICE error POSTing to the db', err);
     });
-  }
+  } // end storeUserInfo
 
 
   //this sends the currentUser to the controller from the db
@@ -106,7 +110,37 @@ app.service('SleuthService', function($http) {
     }).catch(function(err) {
       console.log('error in service getGames ', err);
     });
-  }
+  }// end getGames
+
+  //saving game from suggestions to watchlist
+  this.saveToWatchlist = function(game) {
+    watchlist.push(game);
+    var id = "58a491cc94d8e644cca3c373";
+    return $http({
+      method: "PUT",
+      url: "/user/" + id,
+      data: game
+    }).then(function(response) {
+      console.log('POSTing game to DB: ', game);
+      return response;
+    }).catch(function(err) {
+      console.log('error POSTing game to DB: ', err);
+    });
+  } // end saveToWatchlist
+
+//request for watchlist sent to user.js router
+  this.getWatchlist = function() {
+    return $http({
+      method: "GET",
+      url: "/user"
+    }).then(function(response) {
+      console.log('SERVICE getting watchlist from DB', response.watchlist);
+      watchlist = response.watchlist
+      return response.watchlist;
+    }).catch(function(err) {
+      console.log('error GETting watchlist on SERVICE ', err);
+    });
+  }//end getWatchlist
 
 
 
