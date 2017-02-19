@@ -8,6 +8,7 @@ var rp = require('request-promise');
 
 var user = require('./routes/user');
 var APIquery = require('./routes/APIquery')
+var gameSearch = require('./routes/gameSearch')
 app.use(bodyParser.json());
 
 /** --- MONGOOSE CONNECTION --- **/
@@ -24,7 +25,8 @@ mongoose.connection.on('error', function () {
 /** -- ROUTES -- **/
 app.use(express.static('public'));
 app.use('/user', user);
-app.use('/APIquery', APIquery)
+app.use('/APIquery', APIquery);
+app.use('/gameSearch', gameSearch)
 
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));

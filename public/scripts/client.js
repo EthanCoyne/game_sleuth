@@ -13,7 +13,7 @@ app.config(function($routeProvider, $locationProvider) {
     controller: 'sleuthController as sleuth'
   }).when('/suggestions', {
     templateUrl: 'views/suggestions.html',
-    controller: 'sleuthController as sleuth'
+    controller: 'suggestionsController as sugCtrl'
   }).when('/gamePage', {
     templateUrl: 'views/gamePage.html',
     controller: 'sleuthController as sleuth'

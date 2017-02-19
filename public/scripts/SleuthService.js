@@ -95,6 +95,19 @@ app.service('SleuthService', function($http) {
     });
   }
 
+  //send game search query to the server
+  this.getGames = function() {
+    return $http({
+      method: "GET",
+      url:"/gameSearch"
+    }).then(function(response) {
+      console.log('game response from API: ', response.data.results);
+      return response.data.results;
+    }).catch(function(err) {
+      console.log('error in service getGames ', err);
+    });
+  }
+
 
 
 }); // end SleuthService

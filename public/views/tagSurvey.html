@@ -8,11 +8,12 @@
   <button ng-click="tagCtrl.getConceptsFromAPI()">get concepts from API</button>
   <button ng-click="tagCtrl.getMoreConceptsFromAPI()">get MORE concepts from API</button>
 </div><br>
-<div class="selectedTags three columns">
-  <p>Currently Selected Tags:</p><br>
+<div id="selectedTags" class="three columns">
+  <p>Currently searching with ({{tagCtrl.currentlySelectedTags.length}}) tags:</p><br>
   <ul>
-    <li ng-show="selectedTag" ng-repeat="selectedTag in tagCtrl.currentlySelectedTags">{{selectedTag.name}}</li>
+    <li><button ng-show="selectedTag" ng-repeat="selectedTag in tagCtrl.currentlySelectedTags" ng-model="tagCtrl.currentlySelectedTags[$index]" ng-click="tagCtrl.removeTag(selectedTag[$index])">{{selectedTag.name}}</button></li><br>
   </ul>
+  <button ng-click="">Search for a Game!</button>
 </div>
 <!-- Scroll box to hold concept tags -->
 <div id="scrollArea" class="nine columns" style="float: right">

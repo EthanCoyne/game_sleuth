@@ -26,6 +26,7 @@ tagCtrl.getConceptsFromService = function() {
   });
 }
 
+
 //asks service to query API for MORE concepts
 tagCtrl.getMoreConceptsFromAPI = function() {
   SleuthService.getMoreConceptsFromAPI().then(function(response) {
@@ -35,6 +36,8 @@ tagCtrl.getMoreConceptsFromAPI = function() {
     console.log('CONTROLLER error requesting concepts from service');
   });
 }
+//get concepts from API on page load
+tagCtrl.getConceptsFromAPI();
 
 //grabs list of concept tags from API on page load.
 tagCtrl.getConceptsFromService();
@@ -46,9 +49,17 @@ tagCtrl.goToBottom = function() {
   $anchorScroll();
 };
 
+//on click of tag button, adds tag to currentlySelectedTags to use as search params
 tagCtrl.selectThisTag = function (tag) {
   console.log('selected tag is: ', tag);
   tagCtrl.currentlySelectedTags.push(tag);
+}
+
+//removes a selected tag from currentlySelectedTags
+tagCtrl.removeTag = function (tagIndex) {
+  console.log(tagCtrl.currentlySelectedTags);
+  tagCtrl.currentlySelectedTags.splice(tagIndex, 1)
+  console.log(tagCtrl.currentlySelectedTags);
 }
 
 //asks the SleuthService for the current username.

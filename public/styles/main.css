@@ -18,3 +18,7 @@ button.tagButton {
 #introBlurb {
   display: inline-block;
 }
+
+#selectedTags li{
+  list-style: none;
+}
