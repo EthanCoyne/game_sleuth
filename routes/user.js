@@ -28,9 +28,11 @@ router.post('/', function(req, res) {
   });
 }); // end post to the db
 
+//add game to watchlist
 router.put('/:id', function(req, res) {
-  var id = "58a491cc94d8e644cca3c373";
+  var id = "58ab4b433a90d24fe894572e";
   var game = req.body;
+  console.log('saving ', game.name, ' to the watchlist');
   // console.log('req.body to be stored is: ', req.body);
   User.findByIdAndUpdate(id, {$push: {"watchlist": game}},
   {safe: true, new: true},
@@ -44,4 +46,21 @@ router.put('/:id', function(req, res) {
   });
 });
 
+//delete game from watchlist
+router.put('/watchlist/:id', function(req, res) {
+  var id = "58ab4b433a90d24fe894572e";
+  var game = req.body;
+  console.log('deleteing', game.name);
+  // console.log('removing ', game.name, 'from the watchlist');
+  User.update({_id: id}, {$pull: {"watchlist": {id: game.id}}},
+  {safe: true, new: true},
+   function(err) {
+    if (err) {
+      console.log('error updating watchlist: ', err);
+      return res.sendStatus(500);
+    }
+    // console.log('ROUTER storing', req.body, ' to watchlist');
+    res.sendStatus(204);
+  });
+});
 module.exports=router;

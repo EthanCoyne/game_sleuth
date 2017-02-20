@@ -112,10 +112,25 @@ app.service('SleuthService', function($http) {
     });
   }// end getGames
 
+
+//request for watchlist sent to user.js router
+  this.getWatchlist = function() {
+    return $http({
+      method: "GET",
+      url: "/user"
+    }).then(function(response) {
+      console.log('SERVICE getting watchlist from DB', response.data[0].watchlist);
+      watchlist = response.data[0].watchlist
+      return response.data[0].watchlist;
+    }).catch(function(err) {
+      console.log('error GETting watchlist on SERVICE ', err);
+    });
+  }//end getWatchlist
+
   //saving game from suggestions to watchlist
   this.saveToWatchlist = function(game) {
-    watchlist.push(game);
-    var id = "58a491cc94d8e644cca3c373";
+    // watchlist.push(game);
+    var id = "58ab4b433a90d24fe894572e";
     return $http({
       method: "PUT",
       url: "/user/" + id,
@@ -128,19 +143,20 @@ app.service('SleuthService', function($http) {
     });
   } // end saveToWatchlist
 
-//request for watchlist sent to user.js router
-  this.getWatchlist = function() {
+  //remove game from watchlist
+  this.removeFromWatchlist = function(game) {
+    var id = "58ab4b433a90d24fe894572e";
     return $http({
-      method: "GET",
-      url: "/user"
+      method: "PUT",
+      url: "/user/watchlist/" + id,
+      data: game
     }).then(function(response) {
-      console.log('SERVICE getting watchlist from DB', response.watchlist);
-      watchlist = response.watchlist
-      return response.watchlist;
+      console.log('SERVICE deleting from watchlist: ', game.name);
+      return response;
     }).catch(function(err) {
-      console.log('error GETting watchlist on SERVICE ', err);
+      console.log('SERVICE error deleting ', game.name, 'from watchlist ', err);
     });
-  }//end getWatchlist
+  }// end removeFromWatchlist
 
 
 
