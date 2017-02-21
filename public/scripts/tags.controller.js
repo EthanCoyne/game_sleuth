@@ -8,10 +8,13 @@ tagCtrl.currentUserName = "";
 tagCtrl.tagList = [];
 //currently selected tags will be saved here
 tagCtrl.currentlySelectedTags=[];
+//results of game search by concepts go here. an array of arrays containing game results
+tagCtrl.gameSearchResults = [];
+
 
 //asks service to query API for inital concept list
 tagCtrl.getConceptsFromAPI = function() {
-  SleuthService.getConceptsFromAPI().then(function(response) {
+  SleuthService.getConceptsFromAPI(tagCtrl.tagList.length).then(function(response) {
     console.log('CONTROLLER API concepts received from service: ', response);
     tagCtrl.tagList = response;
   }).catch(function(err) {
@@ -29,9 +32,11 @@ tagCtrl.getConceptsFromService = function() {
 
 //asks service to query API for MORE concepts
 tagCtrl.getMoreConceptsFromAPI = function() {
-  SleuthService.getMoreConceptsFromAPI().then(function(response) {
+  SleuthService.getMoreConceptsFromAPI(tagCtrl.tagList.length).then(function(response) {
     console.log('CONTROLLER API concepts received from service: ', response);
-    tagCtrl.tagList = response;
+    response.forEach(function(concept) {
+      tagCtrl.tagList.push(concept);
+    })
   }).catch(function(err) {
     console.log('CONTROLLER error requesting concepts from service');
   });
@@ -39,8 +44,8 @@ tagCtrl.getMoreConceptsFromAPI = function() {
 //get concepts from API on page load
 tagCtrl.getConceptsFromAPI();
 
-//grabs list of concept tags from API on page load.
-tagCtrl.getConceptsFromService();
+// //grabs list of concept tags from API on page load.
+// tagCtrl.getConceptsFromService();
 
 //scroll area
 tagCtrl.goToBottom = function() {
@@ -52,6 +57,9 @@ tagCtrl.goToBottom = function() {
 //on click of tag button, adds tag to currentlySelectedTags to use as search params
 tagCtrl.selectThisTag = function (tag) {
   console.log('selected tag is: ', tag);
+  if (tagCtrl.currentlySelectedTags.length == 3) {
+    return;
+  }
   tagCtrl.currentlySelectedTags.push(tag);
 }
 
@@ -71,5 +79,17 @@ tagCtrl.getUserInfo = function() {
 } // end sleuth.getUsername
 //calls getUsername on page load
 tagCtrl.getUserInfo();
+
+
+//Search query with multiple concepts
+  tagCtrl.searchGamesByConcept = function() {
+    SleuthService.searchGamesByConcept(tagCtrl.currentlySelectedTags).then(function(response) {
+        console.log('CTRL returned search results: ', response);
+        tagCtrl.gameSearchResults = response;
+      }).catch(function(err) {
+        console.log('CTRL error searching by concept ', err);
+      });
+  } // end searchGamesByConcept
+
 
 }]); // end tagController

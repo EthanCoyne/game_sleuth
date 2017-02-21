@@ -52,7 +52,7 @@ router.put('/watchlist/:id', function(req, res) {
   var game = req.body;
   console.log('deleteing', game.name);
   // console.log('removing ', game.name, 'from the watchlist');
-  User.update({_id: id}, {$pull: {"watchlist": {id: game.id}}},
+  User.findByIdAndUpdate(id, {$pull: {"watchlist": {id: game.id}}},
   {safe: true, new: true},
    function(err) {
     if (err) {
@@ -62,5 +62,8 @@ router.put('/watchlist/:id', function(req, res) {
     // console.log('ROUTER storing', req.body, ' to watchlist');
     res.sendStatus(204);
   });
-});
+}); // end deleting game from watchlist call
+
+
+
 module.exports=router;

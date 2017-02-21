@@ -16,9 +16,12 @@ var options = {
 }
 
 //Querying the API
-router.get('/', function(req, res) {
+router.get('/:concept', function(req, res) {
+  var concept = req.params.concept;
+  console.log('concept is ', concept);
+  options.url = 'http://www.giantbomb.com/api/concept/' + concept + '/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&field_list=games';
   rp(options, function(error, response, body) {
-    // console.log('body of response: ', body);
+    console.log('API query URL: ', options.url);
     if (!error && body.status_code == 1) {
       // var info = JSON.parse(body);
       // console.log('response from the API: ', info);
@@ -26,14 +29,17 @@ router.get('/', function(req, res) {
       return body;
 
     } else {
-      console.log('error querying API', error);
-      response.statusCode==500;
+      console.log('error querying API');
+      //response.statusCode=500;
     }
   }).then(function(body) {
     res.send(body);
   });
 
 });
+
+//QUERY FOR GETTING INDIVIDUAL GAME PAGE
+// http://www.giantbomb.com/api/game/[GAMEIDHERE]/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&field_list=deck,description,api_detail_url,id,name,platforms,original_game_rating,original_release_date,images,videos,concepts,developers,similar_games,themes
 
 
 

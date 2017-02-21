@@ -1,4 +1,4 @@
-app.service('SleuthService', function($http) {
+app.service('SleuthService', function($http, $q) {
   var currentUser = '';
   var API = "https://www.giantbomb.com/api";
   var APIkey = "3f1edf4d108b204cf9ed1583dd3c082ca2514468";
@@ -31,10 +31,10 @@ app.service('SleuthService', function($http) {
   // }
 
   // GET request to APIquery router
-  this.getConceptsFromAPI = function () {
+  this.getConceptsFromAPI = function (tagListLength) {
     return $http({
       method: 'GET',
-      url: '/APIquery'
+      url: '/APIquery/' + tagListLength
     }).then(function(response) {
       console.log('response from APIquery route: ', response.data.results);
       response.data.results.forEach(function(tag) {
@@ -47,10 +47,10 @@ app.service('SleuthService', function($http) {
   }// end getConceptsFromAPI
 
   // GET request for more concepts to APIquery router
-  this.getMoreConceptsFromAPI = function () {
+  this.getMoreConceptsFromAPI = function (tagListLength) {
     return $http({
       method: 'GET',
-      url: '/APIquery'
+      url: '/APIquery/' + tagListLength
     }).then(function(response) {
       console.log('response from APIquery route: ', response.data.results);
       response.data.results.forEach(function(tag) {
@@ -157,6 +157,54 @@ app.service('SleuthService', function($http) {
       console.log('SERVICE error deleting ', game.name, 'from watchlist ', err);
     });
   }// end removeFromWatchlist
+
+  this.searchGamesByConcept = function(concepts) {
+    var promises = [];
+    concepts.forEach(function(concept) {
+      promises.push($http.get('/gameSearch/' + concept.id))
+    });
+    return $q.all(promises).then(function(results) {
+      console.log('returning all promises from service with ', results);
+      //all results will be pushed here
+      var totalResults = [];
+      results.forEach(function(concepts, status, headers, config) {
+        totalResults.push(concepts.data.results.games)
+        console.log('concepts: ', concepts, 'status: ', status, 'headers: ', headers, 'config: ', config);
+      })
+      console.log('totalResults is: ', totalResults);
+      // final compared results go here, to be returned to client
+      var finalResults = [];
+
+      totalResults[0].forEach(function(game){
+        totalResults[1].forEach(function(game2){
+          if(game.id == game2.id){
+            if(totalResults[2]){
+            totalResults[2].forEach(function(game3){
+              if(game.id == game3.id){
+                finalResults.push(game);
+              }
+            });
+          }
+          else{
+            finalResults.push(game);
+          }
+          }
+        });
+      });
+      return finalResults;
+    });
+
+      // return $http({
+      //   method: "GET",
+      //   url: "/gameSearch/" + concept
+      // }).then(function(response) {
+      //   console.log('SERVICE.searchGamesByConcept received ', response, 'from gameSearch route');
+      //   return response.data.results;
+      // }).catch(function(err) {
+      //   console.log('SERVICE.searchGamesByConcept error receiving results from gameSearch route', err);
+      // });
+
+  }
 
 
 

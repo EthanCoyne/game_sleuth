@@ -2,18 +2,18 @@
 <div id="introBlurb" class="twelve columns">
   <p>Welcome, {{tagCtrl.currentUserName}}!<br>
     Help us find the right games for you by selecting game mechanics you enjoy!<br>
-    It won't take long, and you can edit this information at any time.
+    You can search by up to 3 concepts at a time.
   </p>
-  <button ng-click="tagCtrl.getConceptsFromService()">refresh concept list</button>
-  <button ng-click="tagCtrl.getConceptsFromAPI()">get concepts from API</button>
-  <button ng-click="tagCtrl.getMoreConceptsFromAPI()">get MORE concepts from API</button>
+  <!-- <button ng-click="tagCtrl.getConceptsFromService()">refresh concept list</button> -->
+  <!-- <button ng-click="tagCtrl.getConceptsFromAPI()">get concepts from API</button> -->
+  <button ng-click="tagCtrl.getMoreConceptsFromAPI()">get MORE concepts</button>
 </div><br>
 <div id="selectedTags" class="three columns">
-  <p>Currently searching with ({{tagCtrl.currentlySelectedTags.length}}) tags:</p><br>
+  <p>Currently searching with ({{tagCtrl.currentlySelectedTags.length}}) tags:<br>Click to remove tags</p><br>
   <ul>
     <li><button ng-show="selectedTag" ng-repeat="selectedTag in tagCtrl.currentlySelectedTags" ng-model="tagCtrl.currentlySelectedTags[$index]" ng-click="tagCtrl.removeTag(selectedTag[$index])">{{selectedTag.name}}</button></li><br>
   </ul>
-  <button ng-click="">Search for a Game!</button>
+  <button ng-click="tagCtrl.searchGamesByConcept()">Search for a Game!</button>
 </div>
 <!-- Scroll box to hold concept tags -->
 <div id="scrollArea" class="nine columns" style="float: right">

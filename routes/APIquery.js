@@ -8,12 +8,8 @@ var APIkey = "3f1edf4d108b204cf9ed1583dd3c082ca2514468"
 
 API + "/concepts/?api_key=" + APIkey + '&format=json&limit=10'
 //paramaters of API query request
-var options = {
-  url: 'http://www.giantbomb.com/api/concepts/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&limit=10',
-  headers: {
-    'User-Agent': 'CogentHyena123'},
-    json: true
-}
+
+
 
 
 //callback function for request
@@ -32,9 +28,34 @@ var options = {
 // }
 
 //Querying the API
-router.get('/', function(req, res) {
+router.get('/:length', function(req, res) {
+  var options = {
+    url: 'http://www.giantbomb.com/api/concepts/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&limit=20&offset=0',
+    headers: {
+      'User-Agent': 'CogentHyena123'},
+      json: true
+  }
+  console.log('req.params is ', req.params);
+  var tagListLength = req.params;
+  switch (tagListLength['length']){
+    case '20':
+    options.url = 'http://www.giantbomb.com/api/concepts/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&limit=20&offset=20';
+    break;
+    case '40':
+    options.url = 'http://www.giantbomb.com/api/concepts/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&limit=20&offset=40';
+    break;
+    case '60':
+    options.url = 'http://www.giantbomb.com/api/concepts/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&limit=20&offset=60';
+    break;
+    case '80':
+    options.url = 'http://www.giantbomb.com/api/concepts/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&limit=20&offset=80';
+    break;
+    case '0':
+    options.url = 'http://www.giantbomb.com/api/concepts/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&limit=20'
+  }
+
   rp(options, function(error, response, body) {
-    // console.log('body of response: ', body);
+     console.log('options being passed to API: ', options);
     if (!error && body.status_code == 1) {
       // var info = JSON.parse(body);
       // console.log('response from the API: ', info);
@@ -50,6 +71,8 @@ router.get('/', function(req, res) {
   });
 
 });
+
+//getting MORE concepts from API
 
 
 module.exports=router;

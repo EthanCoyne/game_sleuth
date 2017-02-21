@@ -1,3 +1,4 @@
+/** --- NODE PACKAGE REQUIREMENTS --- **/
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -6,6 +7,7 @@ var mongoose = require('mongoose');
 var request = require('request');
 var rp = require('request-promise');
 
+/** --- ROUTES REQUIREMENTS --- **/
 var user = require('./routes/user');
 var APIquery = require('./routes/APIquery')
 var gameSearch = require('./routes/gameSearch')
@@ -31,7 +33,7 @@ app.use('/gameSearch', gameSearch)
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'public', 'views', 'index.html'));
 });
-// app.use('/*', index);
+
 
 app.set('port', process.env.PORT || 3000);
 
