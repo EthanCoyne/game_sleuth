@@ -3,15 +3,22 @@ app.controller('suggestionsController', ['SleuthService', '$location', '$anchorS
   // console.log('metroid test: ', sugCtrl.metroidData.aliases);
   var sugCtrl = this;
 
-  //searched list of games will go here
-  sugCtrl.gameList = [];
+  //searched list of games to display will go here
+  sugCtrl.searchResults = [];
 
 //ask the service>>router>>API for games
-  sugCtrl.getGames = function() {
-    SleuthService.getGames().then(function(response) {
-      sugCtrl.gameList = response;
+  sugCtrl.getSearchResults = function() {
+    SleuthService.getSearchResults().then(function(response) {
+      sugCtrl.searchResults = response;
+      console.log('searchResults are: ', sugCtrl.searchResults );
     });
   }
+
+  // //grabs search results from service on page load.
+   sugCtrl.getSearchResults();
+
+  //queries the API for game data
+
 
 //save game from suggestions to the watchlist
   sugCtrl.saveToWatchlist = function (game) {

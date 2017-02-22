@@ -5,7 +5,7 @@ var tagCtrl = this;
 
 tagCtrl.currentUserName = "";
 //this holds the list of tags to be displayed in survey page
-tagCtrl.tagList = [];
+tagCtrl.conceptList = [];
 //currently selected tags will be saved here
 tagCtrl.currentlySelectedTags=[];
 //results of game search by concepts go here. an array of arrays containing game results
@@ -14,45 +14,47 @@ tagCtrl.gameSearchResults = [];
 
 //asks service to query API for inital concept list
 tagCtrl.getConceptsFromAPI = function() {
-  SleuthService.getConceptsFromAPI(tagCtrl.tagList.length).then(function(response) {
+  SleuthService.getConceptsFromAPI(tagCtrl.conceptList.length).then(function(response) {
     console.log('CONTROLLER API concepts received from service: ', response);
-    tagCtrl.tagList = response;
+    tagCtrl.conceptList = response;
   }).catch(function(err) {
     console.log('CONTROLLER error requesting concepts from service');
   });
 }
 
-//gets taglist from service without querying the API
+//gets conceptList from service without querying the API
 tagCtrl.getConceptsFromService = function() {
   SleuthService.getConceptsFromService().then(function(response) {
-    tagCtrl.tagList = response;
+    tagCtrl.conceptList = response;
   });
 }
+//grabs existing concept list from service
+// tagCtrl.getConceptsFromService();
+
+
 
 
 //asks service to query API for MORE concepts
 tagCtrl.getMoreConceptsFromAPI = function() {
-  SleuthService.getMoreConceptsFromAPI(tagCtrl.tagList.length).then(function(response) {
+  SleuthService.getMoreConceptsFromAPI(tagCtrl.conceptList.length).then(function(response) {
     console.log('CONTROLLER API concepts received from service: ', response);
     response.forEach(function(concept) {
-      tagCtrl.tagList.push(concept);
+      tagCtrl.conceptList.push(concept);
     })
   }).catch(function(err) {
     console.log('CONTROLLER error requesting concepts from service');
   });
 }
-//get concepts from API on page load
-tagCtrl.getConceptsFromAPI();
 
 // //grabs list of concept tags from API on page load.
 // tagCtrl.getConceptsFromService();
 
-//scroll area
-tagCtrl.goToBottom = function() {
-  $location.hash('bottom');
-
-  $anchorScroll();
-};
+// //scroll area
+// tagCtrl.goToBottom = function() {
+//   $location.hash('bottom');
+//
+//   $anchorScroll();
+// };
 
 //on click of tag button, adds tag to currentlySelectedTags to use as search params
 tagCtrl.selectThisTag = function (tag) {
@@ -77,6 +79,7 @@ tagCtrl.getUserInfo = function() {
     tagCtrl.currentUserName = response.userName;
   });
 } // end sleuth.getUsername
+
 //calls getUsername on page load
 tagCtrl.getUserInfo();
 
@@ -86,10 +89,12 @@ tagCtrl.getUserInfo();
     SleuthService.searchGamesByConcept(tagCtrl.currentlySelectedTags).then(function(response) {
         console.log('CTRL returned search results: ', response);
         tagCtrl.gameSearchResults = response;
-      }).catch(function(err) {
-        console.log('CTRL error searching by concept ', err);
+      }).then(function() {
+          $location.path('/suggestions')
       });
   } // end searchGamesByConcept
+
+
 
 
 }]); // end tagController
