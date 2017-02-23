@@ -11,10 +11,6 @@
   margin-top: 2000px;
 }
 
-button.tagButton {
-
-}
-
 #introBlurb {
   display: inline-block;
 }
@@ -22,3 +18,11 @@ button.tagButton {
 #selectedTags li{
   list-style: none;
 }
+
+/*#conceptButton span{
+  display: none;
+}
+
+#conceptButton span:hover  {
+  display: block;
+}*/

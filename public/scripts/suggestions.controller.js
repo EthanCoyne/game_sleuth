@@ -6,11 +6,16 @@ app.controller('suggestionsController', ['SleuthService', '$location', '$anchorS
   //searched list of games to display will go here
   sugCtrl.searchResults = [];
 
+  // concepts you searched by are stored here
+  sugCtrl.searchedConcepts = [];
+
 //ask the service>>router>>API for games
   sugCtrl.getSearchResults = function() {
-    SleuthService.getSearchResults().then(function(response) {
-      sugCtrl.searchResults = response;
-      console.log('searchResults are: ', sugCtrl.searchResults );
+    SleuthService.getSearchResults().then(function(objToGet) {
+      console.log('searchedConcepts: ', objToGet.searchedConcepts);
+      sugCtrl.searchResults = objToGet.gameData;
+      sugCtrl.searchedConcepts = objToGet.searchedConcepts;
+      console.log('searchResults are: ', objToGet.searchResults );
     });
   }
 

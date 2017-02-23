@@ -40,7 +40,7 @@ router.get('/:concept', function(req, res) {
 router.get('/gameData/:game', function(req, res) {
   var gameId = req.params.game;
   console.log('game is ', gameId);
-  options.url = 'http://www.giantbomb.com/api/game/' + gameId + '/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&field_list=site_detail_url,deck,description,developers,franchises,genres,id,images,name,original_game_rating,original_release_date,platforms,publishers,reviews,similar_games,'
+  options.url = 'http://www.giantbomb.com/api/game/' + gameId + '/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&field_list=site_detail_url,deck,description,videos,developers,franchises,genres,id,images,name,original_game_rating,original_release_date,platforms,publishers,reviews,similar_games,'
   rp(options, function(error, response, body) {
     console.log('API query URL: ', options.url);
     if (!error && body.status_code == 1) {

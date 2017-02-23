@@ -15,6 +15,9 @@ app.service('SleuthService', function($http, $q) {
   //final detailed gameData goes here to be returned on suggestions page
   var gameData = [];
 
+  // stores the concepts you're currently searching by
+  var searchedConcepts = []
+
   // GET request to APIquery router
   this.getConceptsFromAPI = function (conceptListLength) {
     return $http({
@@ -88,7 +91,9 @@ app.service('SleuthService', function($http, $q) {
   this.getSearchResults = function () {
     return new Promise(function(resolve,reject){
       console.log('gameData is ', gameData);
-        resolve(gameData);
+      console.log('searchedConcepts are', searchedConcepts);
+      var objToSend = {gameData: gameData, searchedConcepts: searchedConcepts}
+        resolve(objToSend);
       });
   }
 
@@ -153,6 +158,7 @@ app.service('SleuthService', function($http, $q) {
 
   this.searchGamesByConcept = function(concepts) {
     var promises = [];
+    searchedConcepts = concepts;
     concepts.forEach(function(concept) {
       promises.push($http.get('/gameSearch/' + concept.id))
     });

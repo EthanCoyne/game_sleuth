@@ -1,4 +1,4 @@
-var app = angular.module('sleuthApp', ['ngRoute']);
+var app = angular.module('sleuthApp', ['ngRoute', 'ui.bootstrap']);
 
 //pages routes
 app.config(function($routeProvider, $locationProvider) {

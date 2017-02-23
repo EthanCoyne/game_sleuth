@@ -20,6 +20,6 @@
     <td>{{game.developers[0].name}}</td>
     <td>{{game.publishers[0].name}}</td>
     <td><p ng-repeat="platform in game.platforms">{{platform.name}}</p><br></td>
-    <td><button ng-click="watchCtrl.removeFromWatchlist(game)">Remove from watchlist</button></td>
+    <td><button ng-click="watchCtrl.removeFromWatchlist(game)"><span class="glyphicon glyphicon-remove"></span></button></td>
   </tr>
 </table>

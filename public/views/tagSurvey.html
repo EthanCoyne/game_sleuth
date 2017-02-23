@@ -4,21 +4,23 @@
     Help us find the right games for you by selecting game mechanics you enjoy!<br>
     You can search by up to 3 concepts at a time.
   </p>
-  <!-- <button ng-click="tagCtrl.getConceptsFromService()">refresh concept list</button> -->
+  <button ng-click="tagCtrl.getConceptsFromService()"><span class="glyphicon glyphicon-refresh"></span></button>
   <!-- <button ng-click="tagCtrl.getConceptsFromAPI()">get concepts from API</button> -->
   <button ng-click="tagCtrl.getMoreConceptsFromAPI()">get MORE concepts</button>
+  <i class="icon ion-social-tux"></i>
 </div><br>
-<div id="selectedTags" class="three columns">
-  <p>Currently searching with ({{tagCtrl.currentlySelectedTags.length}}) tags:<br>Click to remove tags</p><br>
+<div id="selectedTags" class="four columns">
+  <p>Displaying ({{tagCtrl.conceptList.length}}) Concepts</p>
+  <p>Currently searching with ({{tagCtrl.currentlySelectedTags.length}}) Concepts:<br>Click to remove concept</p><br>
   <ul>
-    <li><button ng-show="selectedTag" ng-repeat="selectedTag in tagCtrl.currentlySelectedTags" ng-model="tagCtrl.currentlySelectedTags[$index]" ng-click="tagCtrl.removeTag(selectedTag[$index])">{{selectedTag.name}}</button></li><br>
+    <li><button ng-show="selectedTag" ng-repeat="selectedTag in tagCtrl.currentlySelectedTags" ng-model="tagCtrl.currentlySelectedTags[$index]" ng-click="tagCtrl.removeTag(tagCtrl.currentlySelectedTags[$index])">{{selectedTag.name}}</button></li><br>
   </ul>
-  <button ng-click="tagCtrl.searchGamesByConcept()">Search for a Game!</button>
+  <button ng-click="tagCtrl.searchGamesByConcept()"><span class="glyphicon glyphicon-search"></span></button>
 </div>
 <!-- Scroll box to hold concept tags -->
-<div id="scrollArea" class="nine columns" style="float: right">
-  <button id="tagButton" type="button" name="button"  ng-model="tag" ng-repeat="tag in tagCtrl.conceptList" ng-click="tagCtrl.selectThisTag(tag)">{{tag.name}}</button>
-</div>
-<div class="six columns">
+<div id="scrollArea" class="eight columns" style="float: right; padding-right: 10px">
+  <div class="" >
+    <button  ng-repeat="concept in tagCtrl.conceptList" id="conceptButton" type="button" name="button" ng-click="tagCtrl.selectThisTag(concept)">{{concept.name}}</button>
+  </div>
 
 </div>

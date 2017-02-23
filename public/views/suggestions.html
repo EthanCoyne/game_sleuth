@@ -1,4 +1,8 @@
 <h1>SUGGESTIONS FOR YOU</h1>
+<div class="">
+  <h3>You searched by:</h3>
+  <p ng-repeat="concept in sugCtrl.searchedConcepts">{{concept.name}}</p>
+</div>
 
 <table style="width:100%">
   <tr>
@@ -19,7 +23,19 @@
     <td>{{game.original_game_rating[0].name}}</td>
     <td>{{game.developers[0].name}}</td>
     <td>{{game.publishers[0].name}}</td>
-    <td><p ng-repeat="platform in game.platforms">{{platform.name}}</p><br></td>
-    <td><button ng-click="sugCtrl.saveToWatchlist(game)">Save to Watchlist</button></td>
+    <td><i ng-repeat="platform in game.platforms" ng-class="{'ion-social-android': platform.abbreviation == 'ANDR',
+       'ionicons ion-iphone': platform.abbreviation == 'IPHN',
+       'ionicons ion-playstation': platform.abbreviation == 'PS1',
+       'ionicons ion-playstation': platform.abbreviation == 'PS2',
+       'ionicons ion-playstation': platform.abbreviation == 'PS3',
+       'ionicons ion-playstation': platform.abbreviation == 'PS4',
+       'ionicons ion-xbox': platform.abbreviation == 'X360',
+       'ionicons ion-xbox': platform.abbreviation == 'XONE',
+       'ion-social-windows': platform.abbreviation == 'PC',
+       'ion-social-apple': platform.abbreviation == 'MAC',
+       'ion-social-tux': platform.abbreviation == 'LIN',
+       'ion-ios-game-controller-a-outline': platform.abbreviation == 'SNES'}"  class="icon"><br></i></td>
+
+    <td><button ng-click="sugCtrl.saveToWatchlist(game)"><span class="glyphicon glyphicon-star"></span></button></td>
   </tr>
 </table>

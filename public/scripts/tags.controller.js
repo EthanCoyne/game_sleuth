@@ -11,6 +11,23 @@ tagCtrl.currentlySelectedTags=[];
 //results of game search by concepts go here. an array of arrays containing game results
 tagCtrl.gameSearchResults = [];
 
+tagCtrl.dynamicConceptPopover = {};
+
+// tagCtrl.ioniconFilter = function (abbreviation) {
+//   return abbreviation == 'ANDR' ||
+//          abbreviation == 'PS1' ||
+//   abbreviation == 'PS2' ||
+//   abbreviation == 'PS3' ||
+//   abbreviation == 'PS4' ||
+//   abbreviation == 'X360' ||
+//   abbreviation == 'PC' ||
+//   abbreviation == 'XONE' ||
+//   abbreviation == 'MAC' ||
+//   abbreviation == 'LIN' ||
+//   abbreviation == 'SNES' ||
+// }
+
+
 
 //asks service to query API for inital concept list
 tagCtrl.getConceptsFromAPI = function() {
@@ -29,7 +46,7 @@ tagCtrl.getConceptsFromService = function() {
   });
 }
 //grabs existing concept list from service
-// tagCtrl.getConceptsFromService();
+//tagCtrl.getConceptsFromService();
 
 
 
@@ -40,7 +57,8 @@ tagCtrl.getMoreConceptsFromAPI = function() {
     console.log('CONTROLLER API concepts received from service: ', response);
     response.forEach(function(concept) {
       tagCtrl.conceptList.push(concept);
-    })
+    });
+
   }).catch(function(err) {
     console.log('CONTROLLER error requesting concepts from service');
   });
@@ -58,6 +76,7 @@ tagCtrl.getMoreConceptsFromAPI = function() {
 
 //on click of tag button, adds tag to currentlySelectedTags to use as search params
 tagCtrl.selectThisTag = function (tag) {
+  event.preventDefault();
   console.log('selected tag is: ', tag);
   if (tagCtrl.currentlySelectedTags.length == 3) {
     return;
@@ -90,7 +109,8 @@ tagCtrl.getUserInfo();
         console.log('CTRL returned search results: ', response);
         tagCtrl.gameSearchResults = response;
       }).then(function() {
-          $location.path('/suggestions')
+        $location.path('/suggestions')
+      // }).then(function() {
       });
   } // end searchGamesByConcept
 

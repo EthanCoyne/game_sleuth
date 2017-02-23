@@ -59,6 +59,21 @@ router.get('/:length', function(req, res) {
     case "140":
     options.url = 'http://www.giantbomb.com/api/concepts/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&field_list=deck,name,id&limit=20&offset=140';
     break;
+    case "160":
+    options.url = 'http://www.giantbomb.com/api/concepts/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&field_list=deck,name,id&limit=20&offset=160';
+    break;
+    case "180":
+    options.url = 'http://www.giantbomb.com/api/concepts/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&field_list=deck,name,id&limit=20&offset=180';
+    break;
+    case "200":
+    options.url = 'http://www.giantbomb.com/api/concepts/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&field_list=deck,name,id&limit=20&offset=200';
+    break;
+    case "220":
+    options.url = 'http://www.giantbomb.com/api/concepts/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&field_list=deck,name,id&limit=20&offset=220';
+    break;
+    case "240":
+    options.url = 'http://www.giantbomb.com/api/concepts/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&field_list=deck,name,id&limit=20&offset=240';
+    break;
     case '0':
     options.url = 'http://www.giantbomb.com/api/concepts/?api_key=3f1edf4d108b204cf9ed1583dd3c082ca2514468&format=json&limit=20'
   }
