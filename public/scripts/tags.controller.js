@@ -86,7 +86,7 @@ tagCtrl.selectThisTag = function (tag) {
 
 //removes a selected tag from currentlySelectedTags
 tagCtrl.removeTag = function (tagIndex) {
-  console.log(tagCtrl.currentlySelectedTags);
+  console.log('tag index to remove: ', tagIndex);
   tagCtrl.currentlySelectedTags.splice(tagIndex, 1)
   console.log(tagCtrl.currentlySelectedTags);
 }

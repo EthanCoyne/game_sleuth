@@ -13,7 +13,7 @@
   <p>Displaying ({{tagCtrl.conceptList.length}}) Concepts</p>
   <p>Currently searching with ({{tagCtrl.currentlySelectedTags.length}}) Concepts:<br>Click to remove concept</p><br>
   <ul>
-    <li><button ng-show="selectedTag" ng-repeat="selectedTag in tagCtrl.currentlySelectedTags" ng-model="tagCtrl.currentlySelectedTags[$index]" ng-click="tagCtrl.removeTag(tagCtrl.currentlySelectedTags[$index])">{{selectedTag.name}}</button></li><br>
+    <li><button data-id=$index ng-show="selectedTag" ng-repeat="selectedTag in tagCtrl.currentlySelectedTags" ng-click="tagCtrl.removeTag($index)">{{selectedTag.name}}</button></li><br>
   </ul>
   <button ng-click="tagCtrl.searchGamesByConcept()"><span class="glyphicon glyphicon-search"></span></button>
 </div>

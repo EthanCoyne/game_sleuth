@@ -15,7 +15,7 @@ app.controller('suggestionsController', ['SleuthService', '$location', '$anchorS
       console.log('searchedConcepts: ', objToGet.searchedConcepts);
       sugCtrl.searchResults = objToGet.gameData;
       sugCtrl.searchedConcepts = objToGet.searchedConcepts;
-      console.log('searchResults are: ', objToGet.searchResults );
+      console.log('searchResults are: ', objToGet.gameData );
     });
   }
 
