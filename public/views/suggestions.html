@@ -1,8 +1,15 @@
-<h1>SUGGESTIONS FOR YOU</h1>
-<div class="">
-  <h3>You searched by:</h3>
-  <p ng-repeat="concept in sugCtrl.searchedConcepts">{{concept.name}}</p>
+<div style="padding-left:10px">
+  <h4>Showing search results for:</h4>
+  <ul>
+  <li ng-repeat="concept in sugCtrl.searchedConcepts">{{concept.name}}</li>
+</ul>
+<button ng-click="sugCtrl.saveSearch()">Save this search</button>
 </div>
+
+<!-- <select ng-model="search" ng-options="search.conceptsSearched.id as search.conceptsSearched.name in sugCtrl.searchHistory">
+  <option value="">{{search.conceptsSearched.name}}</option>
+
+</select> -->
 
 <table style="width:100%">
   <tr>
@@ -17,18 +24,19 @@
   </tr>
   <tr ng-repeat="game in sugCtrl.searchResults">
     <td><img src="{{game.images[0].icon_url}}" alt="{{game.name}}"></td>
-    <td>{{game.name}}</td>
+    <td><strong>{{game.name}}</strong></td>
     <td>{{game.original_release_date}}</td>
     <td>{{game.deck}}</td>
     <td>{{game.original_game_rating[0].name}}</td>
     <td>{{game.developers[0].name}}</td>
     <td>{{game.publishers[0].name}}</td>
-    <td><i ng-repeat="platform in game.platforms" ng-class="{'ion-social-android': platform.abbreviation == 'ANDR',
+    <td><i ng-repeat="platform in game.platforms | filter: tagCtrl.ioniconFilter(platform.abbrevation)" ng-class="{'ion-social-android': platform.abbreviation == 'ANDR',
        'ionicons ion-iphone': platform.abbreviation == 'IPHN',
        'ionicons ion-playstation': platform.abbreviation == 'PS1',
        'ionicons ion-playstation': platform.abbreviation == 'PS2',
        'ionicons ion-playstation': platform.abbreviation == 'PS3',
        'ionicons ion-playstation': platform.abbreviation == 'PS4',
+       'ionicons ion-playstation': platform.abbreviation == 'PS3N',
        'ionicons ion-xbox': platform.abbreviation == 'X360',
        'ionicons ion-xbox': platform.abbreviation == 'XONE',
        'ion-social-windows': platform.abbreviation == 'PC',

@@ -1,4 +1,7 @@
+// var dateFormat = require('dateformat');
+
 app.service('SleuthService', function($http, $q) {
+
   var currentUser = '';
   var API = "https://www.giantbomb.com/api";
   var APIkey = "3f1edf4d108b204cf9ed1583dd3c082ca2514468";
@@ -16,7 +19,10 @@ app.service('SleuthService', function($http, $q) {
   var gameData = [];
 
   // stores the concepts you're currently searching by
-  var searchedConcepts = []
+  var searchedConcepts = [];
+
+  //search history is stored here
+  var searchHistory = [];
 
   // GET request to APIquery router
   this.getConceptsFromAPI = function (conceptListLength) {
@@ -128,13 +134,13 @@ app.service('SleuthService', function($http, $q) {
   //saving game from suggestions to watchlist
   this.saveToWatchlist = function(game) {
     // watchlist.push(game);
-    var id = "58ab4b433a90d24fe894572e";
+    var id = "58b1e9b040a0620ed770b962";
     return $http({
       method: "PUT",
       url: "/user/" + id,
       data: game
     }).then(function(response) {
-      console.log('POSTing game to DB: ', game);
+      // console.log('POSTing game to DB: ', game);
       return response;
     }).catch(function(err) {
       console.log('error POSTing game to DB: ', err);
@@ -143,7 +149,7 @@ app.service('SleuthService', function($http, $q) {
 
   //remove game from watchlist
   this.removeFromWatchlist = function(game) {
-    var id = "58ab4b433a90d24fe894572e";
+    var id = "58b1e9b040a0620ed770b962";
     return $http({
       method: "PUT",
       url: "/user/watchlist/" + id,
@@ -155,6 +161,20 @@ app.service('SleuthService', function($http, $q) {
       console.log('SERVICE error deleting ', game.name, 'from watchlist ', err);
     });
   }// end removeFromWatchlist
+
+  //removes saved search from DB
+  this.discardSearch = function (search) {
+    var id = "58b1e9b040a0620ed770b962";
+    return $http({
+      method: "PUT",
+      url: "/user/discardSearch/" + id,
+      data: search
+    }).then(function(response) {
+      console.log('discarding search from search history');
+    }).catch(function(err) {
+      console.log('error discarding search from search history');
+    })
+  }// end discardSearch
 
   this.searchGamesByConcept = function(concepts) {
     var promises = [];
@@ -209,6 +229,39 @@ app.service('SleuthService', function($http, $q) {
       });
     });
   }
+
+  this.saveSearch = function (search, concepts) {
+    var objToSave = {
+      'searchResults': search,
+      'conceptsSearched': concepts
+    }
+
+    var id = "58b1e9b040a0620ed770b962";
+    return $http({
+      method: 'PUT',
+      url: '/user/saveSearch/' + id,
+      data: objToSave
+    }).then(function(response) {
+      console.log('ONSERVICE current search to be stored: ', objToSave);
+      return response;
+    }).catch(function(err) {
+      console.log('ONSERVICE error POSTing to the db', err);
+    });
+  }
+
+  //get search history sugCtrl
+  this.getSearchHistory = function () {
+    return $http({
+      method: 'GET',
+      url: '/user'
+    }).then(function(response) {
+      console.log('search history returned: ', response.data[0].searches);
+      return response.data[0].searches;
+    }).catch(function(err) {
+      console.log('error retrieving search history', err);
+    });
+  }
+
 
 
 

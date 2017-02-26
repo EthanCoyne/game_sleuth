@@ -1,4 +1,4 @@
-var app = angular.module('sleuthApp', ['ngRoute', 'ui.bootstrap']);
+var app = angular.module('sleuthApp', ['ngRoute', 'ui.bootstrap', 'angular-loading-bar']);
 
 //pages routes
 app.config(function($routeProvider, $locationProvider) {
@@ -17,6 +17,9 @@ app.config(function($routeProvider, $locationProvider) {
   }).when('/gamePage', {
     templateUrl: 'views/gamePage.html',
     controller: 'sleuthController as sleuth'
+  }).when('/searchHistory', {
+    templateUrl: 'views/searchHistory.html',
+    controller: 'historyController as histCtrl'
   })
     $locationProvider.html5Mode(true);
 }); // end app.config

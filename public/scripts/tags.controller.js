@@ -13,20 +13,37 @@ tagCtrl.gameSearchResults = [];
 
 tagCtrl.dynamicConceptPopover = {};
 
-// tagCtrl.ioniconFilter = function (abbreviation) {
-//   return abbreviation == 'ANDR' ||
-//          abbreviation == 'PS1' ||
-//   abbreviation == 'PS2' ||
-//   abbreviation == 'PS3' ||
-//   abbreviation == 'PS4' ||
-//   abbreviation == 'X360' ||
-//   abbreviation == 'PC' ||
-//   abbreviation == 'XONE' ||
-//   abbreviation == 'MAC' ||
-//   abbreviation == 'LIN' ||
-//   abbreviation == 'SNES' ||
-// }
+tagCtrl.ioniconFilter = function (abbreviation) {
+  return abbreviation == 'ANDR' ||
+         abbreviation == 'PS1' ||
+  abbreviation == 'PS2' ||
+  abbreviation == 'PS3' ||
+  abbreviation == 'PS4' ||
+  abbreviation == 'X360' ||
+  abbreviation == 'PC' ||
+  abbreviation == 'XONE' ||
+  abbreviation == 'MAC' ||
+  abbreviation == 'LIN' ||
+  abbreviation == 'SNES' ||
+  abbreviation == 'IPHN'
+}
 
+//watchList will be stored here
+tagCtrl.watchList = [];
+
+
+// grabs watchlist from DB
+tagCtrl.getWatchlist = function () {
+  SleuthService.getWatchlist().then(function(response) {
+    console.log('storing watchlist to controller', response);
+  tagCtrl.watchList = response;
+  }).catch(function(err) {
+    console.log('error getting watchlist', err);
+  });
+}// end getWatchlist
+
+//grabs watchlist on page load
+tagCtrl.getWatchlist();
 
 
 //asks service to query API for inital concept list
@@ -96,6 +113,7 @@ tagCtrl.getUserInfo = function() {
   SleuthService.getUserInfo().then(function(response) {
     console.log('CONTROLLER current user is: ', response.userName);
     tagCtrl.currentUserName = response.userName;
+
   });
 } // end sleuth.getUsername
 
@@ -106,8 +124,8 @@ tagCtrl.getUserInfo();
 //Search query with multiple concepts
   tagCtrl.searchGamesByConcept = function() {
     SleuthService.searchGamesByConcept(tagCtrl.currentlySelectedTags).then(function(response) {
-        console.log('CTRL returned search results: ', response);
-        tagCtrl.gameSearchResults = response;
+        // console.log('CTRL returned search results: ', response);
+        // tagCtrl.gameSearchResults = response;
       }).then(function() {
         $location.path('/suggestions')
       // }).then(function() {

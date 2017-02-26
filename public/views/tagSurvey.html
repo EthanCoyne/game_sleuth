@@ -7,7 +7,6 @@
   <button ng-click="tagCtrl.getConceptsFromService()"><span class="glyphicon glyphicon-refresh"></span></button>
   <!-- <button ng-click="tagCtrl.getConceptsFromAPI()">get concepts from API</button> -->
   <button ng-click="tagCtrl.getMoreConceptsFromAPI()">get MORE concepts</button>
-  <i class="icon ion-social-tux"></i>
 </div><br>
 <div id="selectedTags" class="four columns">
   <p>Displaying ({{tagCtrl.conceptList.length}}) Concepts</p>
@@ -20,7 +19,7 @@
 <!-- Scroll box to hold concept tags -->
 <div id="scrollArea" class="eight columns" style="float: right; padding-right: 10px">
   <div class="" >
-    <button  ng-repeat="concept in tagCtrl.conceptList" id="conceptButton" type="button" name="button" ng-click="tagCtrl.selectThisTag(concept)">{{concept.name}}</button>
+    <button  ng-repeat="concept in tagCtrl.conceptList track by $index" id="conceptButton" type="button" name="button" ng-click="tagCtrl.selectThisTag(concept)">{{concept.name}}</button>
   </div>
 
 </div>

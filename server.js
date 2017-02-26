@@ -6,6 +6,7 @@ var path = require('path');
 var mongoose = require('mongoose');
 var request = require('request');
 var rp = require('request-promise');
+var dateFormat = require('dateformat');
 
 /** --- ROUTES REQUIREMENTS --- **/
 var user = require('./routes/user');

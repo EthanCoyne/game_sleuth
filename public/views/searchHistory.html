@@ -1,0 +1,21 @@
+<table style="width:98%" ng-repeat="search in histCtrl.searchHistory">
+  <tr>
+    <!-- <th>Concepts Searched</th> -->
+    <th style="width:300px; padding-left:20px">Concept Description</th>
+    <th>{{search.searchResults.length}} Results</th>
+    <th>Searched on {{search.dateSearched}}</th>
+  </tr>
+  <tr>
+    <!-- <td>
+      <ul>
+      <li ng-repeat="concept in search.conceptsSearched">{{concept.name}}<br><br></li>
+    </ul>
+  </td> -->
+  <td>
+    <ul style="width:500px; padding-left:20px">
+      <li ng-repeat="concept in search.conceptsSearched" style=" padding-left:20px; display:inline"><strong>{{concept.name}}:</strong><br>{{concept.deck}}<br><br></li>
+    </ul>
+  </td>
+  <td><button style="background: green; color: white;" ng-click="histCtrl.fullSearchResults(search.conceptsSearched)">See full results</button><br><button ng-click="histCtrl.discardSearch(search)" style="background: red; color: white;">discard this search</button></td>
+</tr>
+</table>
