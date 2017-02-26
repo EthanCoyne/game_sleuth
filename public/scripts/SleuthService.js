@@ -177,6 +177,8 @@ app.service('SleuthService', function($http, $q) {
   }// end discardSearch
 
   this.searchGamesByConcept = function(concepts) {
+    //resuts results to avoid duplicates
+    var finalResults = [];
     var promises = [];
     searchedConcepts = concepts;
     concepts.forEach(function(concept) {

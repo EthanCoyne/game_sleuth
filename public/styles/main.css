@@ -1,7 +1,7 @@
 #scrollArea {
   height: 380px;
   overflow: auto;
-  border: 1px solid black;
+  border: 1px solid grey;
   padding: 10px, 0px, 0px, 0px;
   margin: 0px;
 }
@@ -11,13 +11,38 @@
   margin-top: 2000px;
 }
 
-#introBlurb {
+/*#introBlurb {
   display: inline-block;
-}
+}*/
 
 #selectedTags li{
   list-style: none;
 }
+
+
+tr:nth-child(even) {
+    background-color: #eaefef;
+}
+
+/*#container {
+  width: 100%;
+  display: flex;
+}
+
+.expand {
+  display:none;
+  background: #999;
+  position: absolute;
+ }
+
+.content {
+  padding-left: 20px;
+  width: 25%;
+  border: 1px solid black;
+  height: 250px;
+  background-size:cover;
+  background-repeat: no-repeat;
+}*/
 
 /*#conceptButton span{
   display: none;

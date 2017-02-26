@@ -1,5 +1,5 @@
 <div style="padding-left:10px">
-  <h4>Showing search results for:</h4>
+  <h5>Showing {{sugCtrl.searchResults.length}} results for:</h5>
   <ul>
   <li ng-repeat="concept in sugCtrl.searchedConcepts">{{concept.name}}</li>
 </ul>
@@ -11,8 +11,8 @@
 
 </select> -->
 
-<table style="width:100%">
-  <tr>
+<table style="width:100%" ng-show="sugCtrl.searchResults.length >= 1">
+  <tr style="background: black; color: white;">
     <th> </th>
     <th>Title</th>
     <th>Release Date</th>
@@ -47,3 +47,15 @@
     <td><button ng-click="sugCtrl.saveToWatchlist(game)"><span class="glyphicon glyphicon-star"></span></button></td>
   </tr>
 </table>
+
+<!-- <div id="container" ng-repeat="game in sugCtrl.searchResults">
+  <div class="content col-med-4" style="background: url({{game.images[0].medium_url}})">
+    <div class="top">
+      <strong style="color: white;">{{game.name}}</strong>
+    </div>
+
+    <div class="expand">
+      <p>{{game.deck}}</p>
+    </div>
+  </div>
+</div> -->
