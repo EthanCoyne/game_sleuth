@@ -10,6 +10,9 @@
   display: block;
   margin-top: 2000px;
 }
+#tagPage, #introBlurb, #selectedTags, #pageHeader, #scrollArea {
+  background: #d0dae0;
+}
 
 /*#introBlurb {
   display: inline-block;

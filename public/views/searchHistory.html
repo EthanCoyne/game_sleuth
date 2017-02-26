@@ -1,8 +1,9 @@
-<table style="width:98%" ng-repeat="search in histCtrl.searchHistory">
+<h5>Showing {{histCtrl.searchHistory.length}} Searches</h5>
+<table style="width:100%; background: #4d99cc" ng-repeat="search in histCtrl.searchHistory">
   <tr style="background: black; color: white;">
     <!-- <th>Concepts Searched</th> -->
     <th style="width:300px; padding-left:20px">Concept Description</th>
-    <th>{{search.searchResults.length}} Results</th>
+    <th>{{search.searchResults.length}} Search Results</th>
     <th>Searched on {{search.dateSearched}}</th>
   </tr>
   <tr>
@@ -11,11 +12,11 @@
       <li ng-repeat="concept in search.conceptsSearched">{{concept.name}}<br><br></li>
     </ul>
   </td> -->
-  <td>
+  <td style="background: #4d99cc">
     <ul style="width:500px; padding-left:20px">
       <li ng-repeat="concept in search.conceptsSearched" style=" padding-left:20px; display:inline"><strong>{{concept.name}}:</strong><br>{{concept.deck}}<br><br></li>
     </ul>
   </td>
-  <td><button style="background: green; color: white;" ng-click="histCtrl.fullSearchResults(search.conceptsSearched)">See full results</button><br><button ng-click="histCtrl.discardSearch(search)" style="background: red; color: white;">discard this search</button></td>
+  <td style="background: #4d99cc"><button style="background: green; color: white;" ng-click="histCtrl.fullSearchResults(search.conceptsSearched)">See full results</button><br><button ng-click="histCtrl.discardSearch(search)" style="background: red; color: white;">discard this search</button></td>
 </tr>
 </table>

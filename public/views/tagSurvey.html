@@ -1,27 +1,31 @@
-<div id="introBlurb" class="twelve columns">
+<div id="tagPage">
+<div id="introBlurb" class="twelve columns" style="">
   <p>Welcome, {{tagCtrl.currentUserName}}!<br>
     Help us find the right games for you by selecting game mechanics you enjoy!<br>
     You can search by up to 3 concepts at a time.
   </p>
-  <button ng-click="tagCtrl.getConceptsFromService()"><span class="glyphicon glyphicon-refresh"></span></button>
+  <button ng-click="tagCtrl.getConceptsFromService()" style="background:#cecac2; color: black;"><span class="glyphicon glyphicon-refresh"></span></button>
   <!-- <button ng-click="tagCtrl.getConceptsFromAPI()">get concepts from API</button> -->
-  <button ng-click="tagCtrl.getMoreConceptsFromAPI()">get concepts (20)</button>
-  <button ng-click="tagCtrl.searchGamesByConcept()"><span class="glyphicon glyphicon-search"></span></button>
+  <button ng-click="tagCtrl.getMoreConceptsFromAPI()" style="background: tomato; color: white">get concepts (20)</button>
+  <button ng-click="tagCtrl.searchGamesByConcept()" style="background: green; color: white"><span class="glyphicon glyphicon-search"></span></button>
 </div><br>
 <div id="selectedTags" class="four columns">
   <p>Displaying ({{tagCtrl.conceptList.length}}) Concepts</p>
   <p>Currently searching with ({{tagCtrl.currentlySelectedTags.length}}) Concepts:<br>Click to remove concept</p><br>
 
   <ul>
-    <li ng-repeat="selectedTag in tagCtrl.currentlySelectedTags"><button data-id=$index ng-show="selectedTag"  ng-click="tagCtrl.removeTag($index)">{{selectedTag.name}}</button><br></li>
+    <li ng-repeat="selectedTag in tagCtrl.currentlySelectedTags"><button data-id=$index ng-show="selectedTag"  ng-click="tagCtrl.removeTag($index)" style="background: green; color: white">{{selectedTag.name}}</button><br></li>
   </ul>
 
 </div>
 <!-- Scroll box to hold concept tags -->
-<div id="scrollArea" class="eight columns" style="float: right; padding-right: 10px">
+<div id="scrollArea" class="eight columns" style="float: right; padding-right: 10px;">
   <div class="" >
-    <p ng-show="tagCtrl.conceptList.length == 0">Click the Get Concepts button to populate the list</p>
-    <button  ng-repeat="concept in tagCtrl.conceptList track by $index" id="conceptButton" type="button" name="button" ng-click="tagCtrl.selectThisTag(concept)">{{concept.name}}</button>
+    <p ng-show="tagCtrl.conceptList.length == 0" style="color: red"><strong>Click the Get Concepts button to populate the list! Keep clicking to add more!</strong></p>
+    <button style="background: tomato; color:white;" ng-repeat="concept in tagCtrl.conceptList track by $index" id="conceptButton" type="button" name="button" ng-click="tagCtrl.selectThisTag(concept)">{{concept.name}}</button>
   </div>
+
+</div>
+
 
 </div>
