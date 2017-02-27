@@ -66,15 +66,16 @@ router.put('/watchlist/:id', function(req, res) {
   });
 }); // end deleting game from watchlist call
 
+//removes saved search from the db
 router.put('/discardSearch/:id', function(req, res) {
   var id = "58b1e9b040a0620ed770b962";
-  var search1 = req.body.dateSearched.slice(0, 10);
-  console.log('search1 string is ', search1);
+  // var search1 = req.body.dateSearched.slice(0, 10);
+  // console.log('search1 string is ', search1);
+  //
+  // var search2 = req.body.dateSearched.slice(11, 23);
+  // console.log('search2 string is ', search2);
 
-  var search2 = req.body.dateSearched.slice(11, 23);
-  console.log('search2 string is ', search2);
-
-  var search = search1 + ' ' + search2 + 'Z';
+  var search = req.body.dateSearched;
 
   console.log('searchdate to pass to route is ', search);
 
