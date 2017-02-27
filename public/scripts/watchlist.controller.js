@@ -30,4 +30,12 @@ watchCtrl.removeFromWatchlist = function (game) {
   watchCtrl.getWatchlist();
 }
 
+//sends a single game to SleuthService
+watchCtrl.storeGame = function (game) {
+  console.log('storing game on service', game );
+  SleuthService.storeGame(game).then(function() {
+    $location.path('/gamePage');
+  });
+}
+
   }]); // end controller

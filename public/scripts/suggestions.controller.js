@@ -12,6 +12,9 @@ app.controller('suggestionsController', ['SleuthService', '$location', '$anchorS
   // search history is stored here
   sugCtrl.searchHistory = [];
 
+//single game data to display
+  sugCtrl.game = [];
+
 //ask the service>>router>>API for games
   sugCtrl.getSearchResults = function() {
     SleuthService.getSearchResults().then(function(objToGet) {
@@ -49,6 +52,18 @@ app.controller('suggestionsController', ['SleuthService', '$location', '$anchorS
   sugCtrl.saveToWatchlist = function (game) {
     SleuthService.saveToWatchlist(game);
   }
+
+  //sends a single game to SleuthService
+  sugCtrl.storeGame = function (game) {
+    console.log('storing game on service', game );
+    SleuthService.storeGame(game);
+    // .then(function(response) {
+    // }).then(function () {
+    //   $location.path('/gamePage');
+    // });
+}
+
+
 
   // //get search history
   // sugCtrl.getSearchHistory = function () {

@@ -1,0 +1,6 @@
+<div class="">
+  <h4 >{{gameCtrl.game.name}}</h4>
+  <img src="{{gameCtrl.game.images[0].medium_url}}" alt="">
+  <iframe ng-show="gameCtrl.game.videos[0].url" src="" width="" height=""></iframe>
+</div>
+<div style="margin: 10px;" ng-bind-html="gameCtrl.gameHTML"></div>

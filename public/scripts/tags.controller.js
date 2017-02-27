@@ -13,20 +13,20 @@ tagCtrl.gameSearchResults = [];
 
 tagCtrl.dynamicConceptPopover = {};
 
-tagCtrl.ioniconFilter = function (abbreviation) {
-  return abbreviation == 'ANDR' ||
-         abbreviation == 'PS1' ||
-  abbreviation == 'PS2' ||
-  abbreviation == 'PS3' ||
-  abbreviation == 'PS4' ||
-  abbreviation == 'X360' ||
-  abbreviation == 'PC' ||
-  abbreviation == 'XONE' ||
-  abbreviation == 'MAC' ||
-  abbreviation == 'LIN' ||
-  abbreviation == 'SNES' ||
-  abbreviation == 'IPHN'
-}
+// tagCtrl.ioniconFilter = function (abbreviation) {
+//   return abbreviation == 'ANDR' ||
+//          abbreviation == 'PS1' ||
+//   abbreviation == 'PS2' ||
+//   abbreviation == 'PS3' ||
+//   abbreviation == 'PS4' ||
+//   abbreviation == 'X360' ||
+//   abbreviation == 'PC' ||
+//   abbreviation == 'XONE' ||
+//   abbreviation == 'MAC' ||
+//   abbreviation == 'LIN' ||
+//   abbreviation == 'SNES' ||
+//   abbreviation == 'IPHN'
+// }
 
 //watchList will be stored here
 tagCtrl.watchList = [];
@@ -127,7 +127,7 @@ tagCtrl.getUserInfo();
         // console.log('CTRL returned search results: ', response);
         // tagCtrl.gameSearchResults = response;
       }).then(function() {
-        $location.path('/suggestions')
+        $location.path('/suggestions');
       // }).then(function() {
       });
   } // end searchGamesByConcept

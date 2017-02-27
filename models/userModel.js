@@ -7,7 +7,9 @@ var UserSchema = new Schema({
   userName: {type: String, required: true},
   tags: Array,
   watchlist: Array,
-  searches: Array
+  searches: [{
+    dateSearched: String
+  }]
 });
 
 var User = mongoose.model('User', UserSchema);

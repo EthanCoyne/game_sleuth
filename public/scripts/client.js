@@ -16,7 +16,7 @@ app.config(function($routeProvider, $locationProvider) {
     controller: 'suggestionsController as sugCtrl'
   }).when('/gamePage', {
     templateUrl: 'views/gamePage.html',
-    controller: 'sleuthController as sleuth'
+    controller: 'gameController as gameCtrl'
   }).when('/searchHistory', {
     templateUrl: 'views/searchHistory.html',
     controller: 'historyController as histCtrl'

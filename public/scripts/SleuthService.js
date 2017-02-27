@@ -1,6 +1,6 @@
 // var dateFormat = require('dateformat');
 
-app.service('SleuthService', function($http, $q) {
+app.service('SleuthService', function($http, $q, $location) {
 
   var currentUser = '';
   var API = "https://www.giantbomb.com/api";
@@ -23,6 +23,9 @@ app.service('SleuthService', function($http, $q) {
 
   //search history is stored here
   var searchHistory = [];
+
+  // single game for watchCtrl to display
+  var gameStored = {};
 
   // GET request to APIquery router
   this.getConceptsFromAPI = function (conceptListLength) {
@@ -100,6 +103,20 @@ app.service('SleuthService', function($http, $q) {
       console.log('searchedConcepts are', searchedConcepts);
       var objToSend = {gameData: gameData, searchedConcepts: searchedConcepts}
         resolve(objToSend);
+      });
+  }
+
+  //stores individual game to be served to gameCtrl for display
+  this.storeGame = function (gameReceived) {
+    gameStored = gameReceived;
+    $location.path('/gamePage');
+  }
+
+  // serves game to gameCtrl
+  this.displayGame = function () {
+    return new Promise(function(resolve,reject){
+      console.log('game ', gameStored);
+        resolve(gameStored);
       });
   }
 
